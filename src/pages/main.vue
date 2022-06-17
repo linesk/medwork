@@ -62,6 +62,7 @@
       </div>
     </div>
   </div>
+  <app-footer />
 </template>
 
 <route lang="yaml">

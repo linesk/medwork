@@ -16,6 +16,7 @@
 				py-2
 				px-3
 				shadow-md
+        z-30
 				flex
 				items-center
 				border-b border-gray-400/50

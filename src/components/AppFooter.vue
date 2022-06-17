@@ -26,7 +26,6 @@
         Activity Log
       </div>
     </nav>
-    test
   </footer>
 </template>
 

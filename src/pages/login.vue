@@ -40,8 +40,9 @@ import App from '@/App.vue';
     <!-- Consultation -->
     <button class="
       my-2 py-2 w-full bg-white font-bold text-blue-700 text-sm
-      border-2 border-blue-600 rounded-2xl
-      ">
+      border-2 border-blue-600 rounded-2xl "
+      @click="$router.push('/ipd-consult')"
+    >
       CONSULTATION
     </button>
     <button class="
