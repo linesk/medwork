@@ -11,3 +11,4 @@ dist-ssr
 .idea
 yarn.lock
 pnpm.lock
+pnpm-lock.yaml
