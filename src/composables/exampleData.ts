@@ -18,3 +18,27 @@ export const MockConsultList = [
     ward: 'SW14',
   },
 ]
+
+export const userid = 
+  {
+    id: '1234',
+    name: 'Athit',
+    role: 'ID'
+  }
+
+export const divisions = [
+  'Cardio', 
+  'Neuro', 
+  'Nephro', 
+  'GI', 
+  'Endo', 
+  'Onco',
+  'Hemato',
+  'ID',
+  'AIR',
+  'Chest',
+  'Nutrition',
+  'Geriatric',
+  'Skin'
+]
+

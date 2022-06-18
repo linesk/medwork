@@ -38,7 +38,7 @@
       <div id="menu-set-1" class="flex flex-col items-stretch col-span-1">
         <div v-for="el in Menu1" :key="el.title"
           class="flex justify-center w-full">
-          <a href="#"
+          <a :href="el.to"
           class="menu-button"
           :style="{ backgroundColor: el.color }"
           >
@@ -50,7 +50,7 @@
       <div id="menu-set-2" class="flex flex-col items-stretch col-span-1">
         <div v-for="el in Menu2" :key="el.title"
           class="flex justify-center w-full">
-          <a href="#"
+          <a :href="el.to"
           class="menu-button"
           :style="{ backgroundColor: el.color }"
         >
