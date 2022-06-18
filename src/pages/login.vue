@@ -33,7 +33,7 @@ import App from '@/App.vue';
       </div>
       <div class="flex justify-end">
         <span class="text-gray-200 text-sm italic">
-          Sign up
+          <a href="registration">Sign up</a>
         </span>
       </div>
     </div>
