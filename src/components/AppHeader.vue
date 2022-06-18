@@ -2,7 +2,9 @@
   import LogoMedwork from '@/assets/logo.png';
   import { currentRouteInfo } from '@/composables/routeInfo'
 
-  const title = currentRouteInfo()?.header ?? 'No route found'
+  const title = computed(() => {
+    return currentRouteInfo()?.header ?? 'No route found'
+  })
 
 </script>
 

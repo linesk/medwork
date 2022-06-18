@@ -1,23 +1,42 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+const isConsultStatus = computed(() => {
+  const route = useRoute()
+  console.log(route)
+  return route.name == 'consult-status'
+})
 
 </script>
 
 <template>
   <div class="flex flex-col items-center border-2 border-black p-2">
     <p>Search Patient</p>
-    <div>
-      <span class="font-bold text-lg">HN</span>
+    <div class="flex">
+      <span class="font-bold text-lg self-center">HN</span>
       <input type="text"
-        class="border mx-3">
+        class="border mx-3 grow">
       <button class="bg-green-400 text-white rounded-full p-2">
         Find
       </button>
     </div>
     <span> Create new patient </span>
-    <div class="self-start p-2 bg-orange-500 text-white rounded-2xl font-bold">
+
+    <!-- Consultation status -->
+    <div @click="$router.push('/consult-status')"
+      v-if="!isConsultStatus"
+      class="mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
       CONSULTATION STATUS
     </div>
-    <span class="self-start"> please fill in correctly </span>
+    <span class="ml-3 self-start text-xs italic"
+      v-if="!isConsultStatus"> please fill in correctly </span>
+
+    <!-- Consultation form -->
+    <div @click="$router.push('/ipd-consult')"
+      v-if="isConsultStatus"
+      class="mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
+      IPD CONSULTATION
+    </div>
+
   </div>
 
 </template>

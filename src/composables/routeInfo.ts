@@ -12,6 +12,11 @@ const routes = [
     header: 'Ready to work!'
   },
   {
+    path: '/consult-status',
+    name: 'consult-status',
+    header: 'Consultation status'
+  },
+  {
     path: '/ipd-consult',
     name: 'ipd-consult',
     header: 'IPD Consultation form'
