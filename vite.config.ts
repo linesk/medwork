@@ -50,6 +50,7 @@ export default defineConfig({
 		Pages(),
 		Layouts(),
 		VitePWA({
+      registerType: 'autoUpdate',
 			includeAssets: [
 				/* 'favicon-16x16.png',
 				'favicon-32x32.png', */

@@ -3,20 +3,20 @@ Platform for KKU Internal Medicine work
 
 ## Usage
 
+### Installation
+
+```bash
+git clone https://github.com/killzdesu/medwork.git
+cd medwork
+npm install
+```
+
 ### Development
 
 Just run and visit http://localhost:3000
 
 ```bash
-pnpm dev
-```
-
-### Preview in Https
-
-Just run and visit https://localhost
-
-```bash
-pnpm build && pnpm run https-preview
+npm run dev
 ```
 
 ### Build
@@ -24,7 +24,7 @@ pnpm build && pnpm run https-preview
 To build the App, run
 
 ```bash
-pnpm build
+npm run build
 ```
 
 And you will see the generated file in `dist` that ready to be served.
