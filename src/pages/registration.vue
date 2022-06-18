@@ -1,29 +1,15 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-const mockData = {
-  HN: 'MD1234',
-  prefix: 'Mr',
-  name: 'สมพร',
-  surname: 'แข็งแรง',
-  sex: 'male',
-  dob: (new Date()).toISOString()
-}
-
-const timeNow = computed(() => {
-  const now = dayjs()
-  return now.format('DD MMM YYYY HH:mm')
-})
 
 </script>
 
 <template>
-  <!-- === Patient === -->
-  <div class="relative py-3">
-    <div class="static data-box">
-      <div class="data-header">
-        Patient Identification
+  <!-- === New Account === -->
+  <div class="relative pt-3">
+    <div class="static data-box flex flex-col">
+      <div class="data-header self-center">
+        Create New Account
       </div>
-      <div class="grid grid-cols-12 gap-2 mt-2">
+      <div class="grid grid-cols-12 gap-2 mt-6">
         <div class="col-span-3">คำนำหน้า</div>
         <input class="col-span-5 input-box" />
 
@@ -66,14 +52,13 @@ const timeNow = computed(() => {
     </div>
   </div>
   <div class="text-xs">
-      **You have to wait confirmatiobn from admin for 2-3 days**</div>
-
-    <div class="flex items-stretch justify-around mt-4">
-      <button class="bg-red-600 py-2 px-4 rounded-xl text-white font-bold text-md">
-        Request an account
-      </button>
-    </div>
-
+    **You have to wait confirmatiobn from admin for 2-3 days**
+  </div>
+  <div class="flex items-stretch justify-around mt-4">
+    <button class="bg-red-600 py-2 px-4 rounded-2xl text-white font-bold text-md">
+    Request an account
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -81,7 +66,8 @@ const timeNow = computed(() => {
   @apply border-2 border-blue-600 p-3 my-2 rounded-xl
 }
 .data-header {
-  @apply absolute top-2 bg-white w-fit px-3 font-bold text-lg text-blue-800
+  @apply absolute top-2 text-center px-3 py-1 rounded-xl bg-blue-700 w-fit;
+  @apply font-bold text-xl text-white;
 }
 .input-box {
   @apply border border-black
