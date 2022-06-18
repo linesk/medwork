@@ -8,3 +8,4 @@ dist-ssr
 .vercel
 .vite-ssg-temp
 .idea
+yarn.lock
