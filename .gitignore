@@ -2,7 +2,7 @@ node_modules
 .DS_Store
 dist
 dist-ssr
-.firebase/
+.firebase
 *.local
 .*-debug.log
 *.log
@@ -10,3 +10,4 @@ dist-ssr
 .vite-ssg-temp
 .idea
 yarn.lock
+pnpm.lock
