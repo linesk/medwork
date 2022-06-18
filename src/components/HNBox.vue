@@ -22,21 +22,20 @@ const isConsultStatus = computed(() => {
     <span> Create new patient </span>
 
     <!-- Consultation status -->
-    <div @click="$router.push('/consult-status')"
+    <button @click="$router.push('/consult-status')"
       v-if="!isConsultStatus"
-      class="mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
+      class="cursor-pointer mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
       CONSULTATION STATUS
-    </div>
+    </button>
     <span class="ml-3 self-start text-xs italic"
       v-if="!isConsultStatus"> please fill in correctly </span>
 
     <!-- Consultation form -->
-    <div @click="$router.push('/ipd-consult')"
-      v-if="isConsultStatus"
-      class="mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
-      IPD CONSULTATION
-    </div>
-
+    <button @click="$router.push('/ipd-consult')"
+    v-if="isConsultStatus"
+    class="cursor-pointer mt-2 self-start py-1 px-3 bg-orange-500 text-white text-sm rounded-xl font-bold">
+    IPD CONSULTATION
+    </button>
   </div>
 
 </template>

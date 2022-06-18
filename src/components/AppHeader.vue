@@ -30,8 +30,8 @@
           class="max-h-20 lg:max-h-20 inline mr-2"/>
 			</router-link>
       <div class="self-stretch flex flex-col md:flex-row justify-center md:items-center">
-        <span class="block md:mx-2 self-start font-extrabold lg:text-3xl text-2xl">MEDWORK</span>
-        <span class="hidden md:block mx-1 md:mx-3 lg:text-2xl md:text-xl text-lg"> | </span>
+        <span class="block md:mx-2 self-start md:self-center font-extrabold lg:text-3xl text-2xl">MEDWORK</span>
+        <span class="hidden md:block mx-1 md:mx-2 lg:text-2xl md:text-xl text-lg"> | </span>
         <span class="lg:text-2xl text-lg">{{ title }}</span>
       </div>
 			<div class="ml-auto flex items-center h-full">
