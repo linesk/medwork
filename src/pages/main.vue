@@ -39,10 +39,9 @@
         <div v-for="el in Menu1" :key="el.title"
           class="flex justify-center w-full">
           <a href="#"
-          class="border-black rounded-full p-3 my-2 w-full
-          text-lg lg:text-2xl font-bold text-white text-center"
+          class="menu-button"
           :style="{ backgroundColor: el.color }"
-        >
+          >
           {{ el.title }}
         </a>
         </div>
@@ -52,8 +51,7 @@
         <div v-for="el in Menu2" :key="el.title"
           class="flex justify-center w-full">
           <a href="#"
-          class="border-black rounded-full p-3 my-2 w-full
-          text-lg lg:text-2xl font-bold text-white text-center"
+          class="menu-button"
           :style="{ backgroundColor: el.color }"
         >
           {{ el.title }}
@@ -64,6 +62,13 @@
   </div>
   <app-footer />
 </template>
+
+<style scoped>
+.menu-button {
+  @apply border-black rounded-2xl p-3 my-2 w-full;
+  @apply text-lg lg:text-2xl font-bold text-white text-center;
+}
+</style>
 
 <route lang="yaml">
 name: home

@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import LogoMedwork from '@/assets/logo.png';
+  import { currentRouteInfo } from '@/composables/routeInfo'
 
-  const title = ref('PAGE')
+  const title = currentRouteInfo()?.header ?? 'No route found'
 
 </script>
 
@@ -27,8 +28,8 @@
           class="max-h-20 lg:max-h-20 inline mr-2"/>
 			</router-link>
       <div class="self-stretch flex flex-col md:flex-row justify-center md:items-center">
-        <span class="block md:mx-2 self-center font-bold lg:text-2xl text-lg">MEDWORK</span>
-        <span class="hidden md:block mx-1 md:mx-3 lg:text-2xl md:text-lg text-md"> | </span>
+        <span class="block md:mx-2 self-start font-extrabold lg:text-3xl text-2xl">MEDWORK</span>
+        <span class="hidden md:block mx-1 md:mx-3 lg:text-2xl md:text-xl text-lg"> | </span>
         <span class="lg:text-2xl text-lg">{{ title }}</span>
       </div>
 			<div class="ml-auto flex items-center h-full">

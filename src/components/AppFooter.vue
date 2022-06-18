@@ -14,7 +14,7 @@
       flex items-stretch
       items-center
       border-t border-gray-400/50
-      bottom-0
+      bottom-0 right-0
       h-16
       text-lg font-bold
       "
