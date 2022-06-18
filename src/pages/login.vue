@@ -58,7 +58,7 @@ import App from '@/App.vue';
       CHIEF RESIDENT SHIFT TABLE
     </button>
     <a href="#" class="mt-3 text-sm text-blue-700">
-      ถาควิชาอายุรศาสตร์
+      ภาควิชาอายุรศาสตร์
 
     </a>
   </div>
