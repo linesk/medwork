@@ -1,128 +1,171 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
-const mockData = {
-  HN: 'MD1234',
-  prefix: 'Mr',
-  name: 'สมพร',
-  surname: 'แข็งแรง',
-  sex: 'male',
-  dob: (new Date()).toISOString()
-}
+import BorderedBox from '@/components/BorderedBox.vue';
+import { useTimestamp } from '@vueuse/core'
+import { Divisions, FromDivisions, addConsultData } from '@/composables/useDataAPI'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const timeNow = computed(() => {
-  const now = dayjs()
+  const timestamp = useTimestamp({ offset: 0 })
+  const now = dayjs(timestamp.value)
   return now.format('DD MMM YYYY HH:mm')
 })
+
+const submitLoading = ref(false);
+
+const patientData = ref()
+const admissionData = ref({
+  an: 'i22-',
+  cover: '',
+  ward: ''
+})
+
+const consultData = ref({
+  urgency: 0,
+  consult_from: '',
+  sub: '',
+  consult_to: '',
+  detail: '',
+  dx: '',
+  consult: '',
+  consultee: '',
+  tel: '',
+  time: useTimestamp({ offset:0 }).value
+})
+
+const addConsult = async () => {
+  if( submitLoading.value ) return;
+  submitLoading.value = true;
+  const res = await addConsultData(patientData.value.data, admissionData.value, consultData.value);
+  submitLoading.value = false;
+  if (res?.result) {
+    router.push('consult-status')
+  }
+}
+const modal = ref(true);
 
 </script>
 
 <template>
-  <!-- {{ mockData.name }} {{ mockData.surname }} -->
-  <HNBox />
-  <!-- === Patient === -->
-  <div class="relative py-3">
-    <div class="static data-box">
-      <div class="data-header">
-        Patient Identification
-      </div>
-      <div class="grid grid-cols-12 gap-2 mt-2">
-        <div class="col-span-2">HN</div>
-        <input class="col-span-4 input-box" />
+  <VModal v-model="modal">
+    <template v-slot:title> Hello </template>
+    HAHAHAHAHAHA
+  </VModal>
+  <h1 class="text-3xl text-center font-bold">
+    Consultation
+  </h1>
+  <br><br>
+  <div class="w-full md:w-2/3 mx-auto">
+    <!-- <HNBox /> -->
+    <!-- === Patient === -->
+    <PatientIden ref="patientData">
+    </PatientIden>
+    <!-- Admission -->
 
-        <div class="col-span-3">Prefix</div>
-        <input class="col-span-3 input-box" />
-
-        <div class="col-span-2">Name</div>
-        <input class="col-span-6 input-box" />
-
-        <div class="col-span-2">Sex</div>
-        <input class="col-span-2 input-box" />
-
-        <div class="col-span-3">Surname</div>
-        <input class="col-span-9 input-box" />
-
-        <div class="col-span-2">DOB</div>
-        <input class="col-span-5 input-box" />
-
-        <div class="col-span-2">Age</div>
-        <input class="col-span-3 input-box" />
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Admission -->
-  
-  <div class="relative py-3">
-    <div class="static data-box">
-      <div class="data-header">
+    <BorderedBox>
+      <template #header>
         Admission Detail
-      </div>
+      </template>
       <div class="grid grid-cols-12 gap-2 mt-2">
         <div class="col-span-2">AN</div>
-        <input class="col-span-4 input-box" />
+        <input class="col-span-4 input-box" v-model="admissionData.an"/>
 
-        <div class="col-span-2">Cover</div>
-        <input class="col-span-4 input-box" />
+        <div class="col-span-2 md:col-start-8">Cover</div>
+        <input v-model="admissionData.cover"
+          class="col-span-4 md:col-span-3 input-box" />
 
-        <div class="col-span-4">Ward</div>
-        <input class="col-span-8 input-box" />
+        <div class="col-span-4 md:col-span-2">Ward</div>
+        <input v-model="admissionData.ward"
+          class="col-span-8 md:col-span-4 input-box" />
       </div>
-    </div>
-  </div>
+    </BorderedBox>
 
 
-  <!-- Consult Details -->
-  
-  <div class="relative py-3">
-    <div class="static data-box">
-      <div class="data-header">
+    <!-- Consult Details -->
+
+    <BorderedBox>
+      <template #header>
         Consultation Detail
-      </div>
+      </template>
       <div class="grid grid-cols-12 gap-2 mt-2">
-        <div class="col-span-4">From</div>
-        <input class="col-span-8 input-box" />
+        <div class="col-span-4 md:col-span-2">Urgency</div>
+        <select v-model="consultData.urgency"
+          class="col-span-8 md:col-span-4 rounded text-base font-normal py-1 px-3 mb-3">
+          <option :value="0">Not urgent</option>
+          <option :value="1">Urgent</option>
+        </select>
 
-        <div class="col-span-4">Sub</div>
-        <input class="col-span-8 input-box" />
+        <div class="col-span-4 md:col-span-2">From</div>
+        <select v-model="consultData.consult_from" 
+          class="col-span-8 md:col-span-4 rounded text-base font-normal py-1 px-3">
+          <option v-for="(div, key) in FromDivisions" :value="key" :key="key">{{ div }}</option>
+        </select>
 
-        <p class="text-center col-span-12 text-blue-700 font-bold">To</p>
+        <div class="col-span-4 md:col-span-2 md:col-start-1">Sub</div>
+        <input v-model="consultData.sub"
+          class="col-span-8 md:col-span-4 input-box" />
 
-        <div class="col-span-4">Med Div?</div>
-        <input class="col-span-8 input-box" />
+        <p class="text-center col-span-12 text-blue-700 font-bold
+          md:text-xl md:p-2 md:col-start-1 md:col-span-6">
+          To
+        </p>
+        <p class="col-span-12 md:col-span-6"></p>
+
+        <div class="col-span-4 md:col-span-2">Med Div?</div>
+        <select v-model="consultData.consult_to" 
+          class="col-span-8 md:col-span-4 rounded text-base font-normal py-1 px-3">
+          <option v-for="(div, key) in Divisions" :value="key" :key="key">{{ div }}</option>
+        </select>
 
         <div class="col-span-12">Detail:</div>
-        <textarea class="col-span-12" style="height: 400px"></textarea>
+        <textarea v-model="consultData.detail"
+          class="col-span-12" style="height: 400px"></textarea>
 
         <div class="col-span-12">Provisional Diagnosis</div>
-        <input class="col-span-12 input-box" />
+        <!-- <input class="col-span-12 input-box" /> -->
+        <textarea v-model="consultData.dx"
+          class="col-span-12" style=""></textarea>
 
         <div class="col-span-12">Consultation Point</div>
-        <input class="col-span-12 input-box" />
+        <!-- <input class="col-span-12 input-box" /> -->
+        <textarea v-model="consultData.consult"
+          class="col-span-12" style=""></textarea>
 
         <div class="col-span-12">Consult by</div>
-        <input class="col-span-12 input-box" />
+        <input v-model="consultData.consultee"
+          class="col-span-12 input-box" />
+
+        <div class="col-span-12">Tel</div>
+        <input v-model="consultData.tel"
+          class="col-span-12 input-box" />
 
         <div class="col-span-12">Date</div>
         <input class="col-span-12 input-box" :value="timeNow" disabled/>
-        
       </div>
-    </div>
-
+    </BorderedBox>
 
     <div class="flex items-stretch justify-around mt-8">
       <button class="bg-green-600 py-2 px-4 rounded-xl text-white font-bold text-md">
         SAVE DRAFT
       </button>
-      <button class="bg-red-600 py-2 px-4 rounded-xl text-white font-bold text-md">
-        SUBMIT
+      <button @click="addConsult"
+        class="bg-red-600 py-2 px-4 rounded-xl text-white font-bold text-md">
+        <pulse-loader :loading="submitLoading" size="8px" color="#fff"></pulse-loader>
+        <span v-if="!submitLoading">SUBMIT</span>
       </button>
     </div>
   </div>
 
 </template>
+<route lang="yaml">
+meta:
+  layout: blank
+</route>
 
-<style scoped>
+<style scoped lang="css">
 .data-box {
   @apply border-2 border-blue-600 p-3 my-2 rounded-xl
 }
@@ -130,7 +173,6 @@ const timeNow = computed(() => {
   @apply absolute top-2 bg-white w-fit px-3 font-bold text-lg text-blue-800
 }
 .input-box {
-  @apply border border-black
-
+  @apply border border-black px-2 rounded py-1
 }
 </style>

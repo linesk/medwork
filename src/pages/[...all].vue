@@ -15,5 +15,5 @@
 <route lang="yaml">
 name : not-found
 meta:
-    layout: 404
+    layout: default
 </route>

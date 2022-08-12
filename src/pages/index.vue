@@ -1,5 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import Logo from '@/assets/logo.png';
+import { useRouter, useRoute } from 'vue-router'
 import dayjs from 'dayjs'
 const passcode = ref()
 const loginBtn = ref()
@@ -8,6 +9,8 @@ const enterPasscode = () => {
     localStorage.setItem('passcode', dayjs().format())
   }
 }
+const router = useRouter()
+router.push('/main')
 localStorage.clear()
 </script>
 

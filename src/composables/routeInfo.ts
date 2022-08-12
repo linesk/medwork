@@ -31,6 +31,11 @@ const routes = [
     name: 'registration',
     header: 'Registration'
   },
+  {
+    path: '/admission',
+    name: 'admission',
+    header: 'Admission Record'
+  },
 ]
 
 export const currentRouteInfo = () => {

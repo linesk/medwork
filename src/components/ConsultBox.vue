@@ -1,11 +1,19 @@
 <script setup lang="ts">
 const props = defineProps(['data'])
 
+const headerClass = computed(()=>{
+  let hc = ["flex w-full px-2 py-1 text-black"]
+  if (props.data?.urgency > 0) hc.push('bg-red-300')
+  else hc.push('bg-blue-200')
+
+  return hc
+})
+
 </script>
 
 <template>
   <div class="flex flex-col w-full border border-blue-700 my-3">
-    <div class="flex bg-blue-200 w-full px-2 py-1 text-black">
+    <div :class="headerClass">
       <span class="badge text-purple-100 bg-purple-700">
         {{ data.from }}
       </span>
@@ -13,8 +21,8 @@ const props = defineProps(['data'])
       <span class="badge text-pink-100 bg-pink-700">
         {{ data.to }}
       </span>
-      <span v-if="data.urgent > 0" class="text-red-500 font-bold px-4">
-        <div class="rounded-full border-2 border-red-600 px-2">
+      <span v-if="data.urgency > 0" class="text-red-700 font-bold px-4">
+        <div class="rounded-full border-2 border-red-700 px-2">
         E
         </div>
       </span>

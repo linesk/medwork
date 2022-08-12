@@ -17,6 +17,16 @@
       to: 'discharge',
       color: '#a10b24'
     },
+    {
+      title: 'Transfer Note',
+      to: 'transfer',
+      color: '#513c96'
+    },
+    {
+      title: 'Ward View',
+      to: 'ward',
+      color: '#2e0ba1'
+    },
   ]
   const Menu2 = [
     {
@@ -28,6 +38,16 @@
       title: 'Division',
       to: 'division',
       color: '#04d484'
+    },
+    {
+      title: 'Shift',
+      to: 'shift',
+      color: '#058525'
+    },
+    {
+      title: 'Rotation',
+      to: 'rotation',
+      color: '#cfb50e'
     },
   ];
 </script>
