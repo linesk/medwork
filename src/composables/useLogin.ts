@@ -22,6 +22,7 @@ export const useLogin = async (user: string, password: string) => {
       localStorage.removeItem('medwork-auth')
       return false
     }
+    console.log(res)
   } catch (err) {
     console.error(err)
   }

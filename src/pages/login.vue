@@ -9,10 +9,10 @@ const username = ref('')
 const password = ref('')
 const login = async () => {
   const res = await useLogin(username.value, password.value)
+  console.log(res)
   if (res) {
     router.push('/main')
   }
-
 }
 
 </script>
@@ -72,8 +72,10 @@ const login = async () => {
     </button>
     <a href="#" class="mt-3 text-sm text-blue-700">
       ภาควิชาอายุรศาสตร์
-
     </a>
+    <p>
+      medwork@kku.ac.th:medkku123
+    </p>
   </div>
 </template>
 
