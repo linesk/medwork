@@ -31,8 +31,13 @@ defineExpose({
         class="col-span-6 md:col-span-4 input-box" />
 
       <div class="col-span-2 md:col-start-8">Sex</div>
-      <input v-model="data.sex"
-        class="col-span-2 md:col-span-3 input-box" />
+      <!-- <input v-model="data.sex" -->
+      <!--   class="col-span-2 md:col-span-3 input-box" /> -->
+      <select v-model="data.sex"
+        class="col-span-2 md:col-span-3 input-box">
+        <option :value="'male'">Male</option>
+        <option :value="'female'">Female</option>
+      </select>
 
       <div class="col-span-3 md:col-span-2">Surname</div>
       <input v-model="data.surname"
@@ -52,7 +57,7 @@ defineExpose({
 
 <style scoped>
 .input-box {
-  @apply border border-black pl-1;
+  @apply border border-black rounded px-2 py-1;
 
 }
 </style>

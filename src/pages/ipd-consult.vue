@@ -46,18 +46,30 @@ const addConsult = async () => {
   }
 }
 const modal = ref(true);
+const modalInfo = ref({
+  title: 'Confirm submit?',
+  content: ''
+})
+const onAccept = (c:any) => {
+  console.log('cf')
+  c()
+}
 
 </script>
 
 <template>
-  <VModal v-model="modal">
-    <template v-slot:title> Hello </template>
-    HAHAHAHAHAHA
+  <VModal v-model="modal"
+    @confirm="onAccept">
+    <template v-slot:title>{{ modalInfo.title }}</template>
+    {{ modalInfo.content }}
   </VModal>
   <h1 class="text-3xl text-center font-bold">
     Consultation
   </h1>
-  <br><br>
+  <br>
+  <div class="flex justify-end">
+    <button class="btn bg-blue-700 text-white">Find Consult</button>
+  </div>
   <div class="w-full md:w-2/3 mx-auto">
     <!-- <HNBox /> -->
     <!-- === Patient === -->
@@ -83,7 +95,6 @@ const modal = ref(true);
       </div>
     </BorderedBox>
 
-
     <!-- Consult Details -->
 
     <BorderedBox>
@@ -98,7 +109,7 @@ const modal = ref(true);
           <option :value="1">Urgent</option>
         </select>
 
-        <div class="col-span-4 md:col-span-2">From</div>
+        <div class="col-span-4 md:col-span-2 md:col-start-1">From</div>
         <select v-model="consultData.consult_from" 
           class="col-span-8 md:col-span-4 rounded text-base font-normal py-1 px-3">
           <option v-for="(div, key) in FromDivisions" :value="key" :key="key">{{ div }}</option>
@@ -174,5 +185,8 @@ meta:
 }
 .input-box {
   @apply border border-black px-2 rounded py-1
+}
+.btn {
+  @apply border border-black rounded py-1 px-2
 }
 </style>

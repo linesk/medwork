@@ -10,6 +10,12 @@ export const install: ViteSetupModule = ({ isClient, router }) => {
 
     const unauthRoutes = ['/login', '/ipd-consult', '/consult-status']
 
+    // Reroute index to consult (temporary use as consult)
+    if (to.path == '/') {
+      return {path: '/ipd-consult'}
+    }
+    // --- remove code above after open full service
+
     if (to.path == '/login' && auth) {
       return { path: '/main'}
     }

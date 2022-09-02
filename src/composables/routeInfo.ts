@@ -36,6 +36,11 @@ const routes = [
     name: 'admission',
     header: 'Admission Record'
   },
+  {
+    path: '/acmed',
+    name: 'acmed',
+    header: 'AC Med'
+  }
 ]
 
 export const currentRouteInfo = () => {

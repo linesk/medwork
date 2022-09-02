@@ -1,7 +1,13 @@
 import axios from 'axios'
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-const loginURL:string = import.meta.env.VITE_LOGIN_API as string ?? ''
+let loginURL:string = ''
+// import.meta.env.VITE_LOGIN_API as string ?? ''
+if (import.meta.env.DEV) {
+  loginURL = import.meta.env.VITE_API_ENDPOINT_LOCAL+'/login' ?? ''
+} else {
+  loginURL = import.meta.env.VITE_API_ENDPOINT+'/login' ?? ''
+}
 
 // Login functions
 // 1. Login and get result of login

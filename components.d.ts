@@ -5,6 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ACMedPatient: typeof import('./src/components/ACMedPatient.vue')['default']
+    ACMedWard: typeof import('./src/components/ACMedWard.vue')['default']
     AdmissionDrugAllergy: typeof import('./src/components/AdmissionDrugAllergy.vue')['default']
     AdmissionHerb: typeof import('./src/components/AdmissionHerb.vue')['default']
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
@@ -12,14 +14,7 @@ declare module '@vue/runtime-core' {
     BorderedBox: typeof import('./src/components/BorderedBox.vue')['default']
     ConsultBox: typeof import('./src/components/ConsultBox.vue')['default']
     HNBox: typeof import('./src/components/HNBox.vue')['default']
-    IconHealthiconsBloodDrop: typeof import('~icons/healthicons/blood-drop')['default']
-    IconHealthiconsLoudlyCrying: typeof import('~icons/healthicons/loudly-crying')['default']
-    IconMdiArrowRightThick: typeof import('~icons/mdi/arrow-right-thick')['default']
     IconMdiClose: typeof import('~icons/mdi/close')['default']
-    IconMdiCloseCircle: typeof import('~icons/mdi/close-circle')['default']
-    IconMdiLeaf: typeof import('~icons/mdi/leaf')['default']
-    IconMdiPill: typeof import('~icons/mdi/pill')['default']
-    IconMdiTrafficCone: typeof import('~icons/mdi/traffic-cone')['default']
     PatientIden: typeof import('./src/components/PatientIden.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

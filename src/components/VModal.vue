@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { VueFinalModal } from 'vue-final-modal'
+defineEmits(['confirm', 'cancel'])
 
-console.log(VueFinalModal)
+// console.log(VueFinalModal)
 
 </script>
 
@@ -15,15 +16,22 @@ console.log(VueFinalModal)
     <span class="mr-8 text-2xl font-bold ">
       <slot name="title"></slot>
     </span>
-    <div class="flex-grow overflow-y-auto">
+    <div class="flex-grow overflow-y-auto p-4">
       <slot v-bind:params="params"></slot>
     </div>
-    <div class="flex-shrink-0 flex justify-center items-center pt-4">
-      <button class="vfm-btn" @click="$emit('confirm', close)">confirm</button>
-      <button class="vfm-btn" @click="$emit('cancel', close)">cancel</button>
+    <div class="flex-shrink-0 flex justify-end content-between pt-2">
+      <button class="btn bg-green-200" @click="$emit('confirm', close)">confirm</button>
+      <button class="btn bg-red-200" @click="$emit('cancel', close)">cancel</button>
     </div>
     <button class="absolute top-0 right-0 mt-2 mr-2" @click="close">
       <icon-mdi-close></icon-mdi-close>
     </button>
   </vue-final-modal>
 </template>
+
+<style scoped>
+.btn {
+  @apply border border-2 rounded-lg p-1 mx-2;
+}
+
+</style>

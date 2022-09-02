@@ -11,6 +11,7 @@ const enterPasscode = () => {
 }
 const router = useRouter()
 router.push('/main')
+// router.push('/ipd-consult')
 localStorage.clear()
 </script>
 
