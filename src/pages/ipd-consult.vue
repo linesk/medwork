@@ -2,7 +2,8 @@
 import dayjs from 'dayjs'
 import BorderedBox from '@/components/BorderedBox.vue';
 import { useTimestamp } from '@vueuse/core'
-import { Divisions, FromDivisions, addConsultData } from '@/composables/useDataAPI'
+import { Divisions, FromDivisions } from '@/composables/useDataAPI'
+import { addConsultData } from '@/composables/useConsult'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { useRouter } from 'vue-router'
 
@@ -68,7 +69,8 @@ const onAccept = (c:any) => {
   </h1>
   <br>
   <div class="flex justify-end">
-    <button class="btn bg-blue-700 text-white">Find Consult</button>
+    <button @click="$router.push('/find-consult')" 
+      class="btn bg-blue-700 text-white">Find Consult</button>
   </div>
   <div class="w-full md:w-2/3 mx-auto">
     <!-- <HNBox /> -->

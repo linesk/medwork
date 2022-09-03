@@ -5,7 +5,7 @@ import BgLogin from '@/assets/bg-login.jpg';
   <header></header>
 	<main
 		class="
-			p-8
+			p-3
 			text-gray-800
 			min-h-screen
       flex flex-col

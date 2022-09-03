@@ -8,7 +8,7 @@ export const install: ViteSetupModule = ({ isClient, router }) => {
 	router.beforeEach((to, from) => {
     const auth = localStorage.getItem('medwork-auth')
 
-    const unauthRoutes = ['/login', '/ipd-consult', '/consult-status']
+    const unauthRoutes = ['/login', '/ipd-consult', '/find-consult', '/consult-status', '/consult/']
 
     // Reroute index to consult (temporary use as consult)
     if (to.path == '/') {
@@ -20,7 +20,8 @@ export const install: ViteSetupModule = ({ isClient, router }) => {
       return { path: '/main'}
     }
     if (!unauthRoutes.includes(to.path) && !auth) {
-      return { path: '/login'}
+      if (!to.path.includes('/consult/'))
+        return { path: '/login'}
     }
   })
 };

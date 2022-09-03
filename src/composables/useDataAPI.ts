@@ -1,23 +1,6 @@
 import axios from 'axios'
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-export const addConsultData = async (Patient: any, Admission: any, Consult: any) => {
-  const data = {...Patient, ...Admission, ...Consult}
-
-  /* const res = await axios.get('http://localhost/kku/api/public/ipd-consult', {
-    params: data
-  });
-  console.log(res.data); */
-
-  const res = {
-    data: {
-      result: true
-    }
-  };
-  await delay(3000);
-
-  return res.data;
-}
 
 export const Divisions = {
   neuro: 'Neurology',
@@ -67,7 +50,6 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
     urgency: data.urgency,
     time: Date.parse(data.time)/1000
   }
-
 }
 
 export const getConsultData = async (limit = 20) => {
