@@ -34,7 +34,7 @@ const findConsult = async ()=>{
       <pulse-loader :loading="isLoading" size="8px" color="#fff"></pulse-loader>
     </button>
     <br>
-    <div v-if="result !== null" class="w-full">
+    <div v-if="result !== null" class="w-full md:w-1/2 md:mx-auto">
       <div v-for="(data, val) in result"
         class="">
         <ConsultBox :data="data" />

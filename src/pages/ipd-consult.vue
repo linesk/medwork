@@ -3,7 +3,8 @@ import dayjs from 'dayjs'
 import BorderedBox from '@/components/BorderedBox.vue';
 import { useTimestamp } from '@vueuse/core'
 import { Divisions, FromDivisions } from '@/composables/useDataAPI'
-import { addConsultData } from '@/composables/useConsult'
+import { findPatient } from '@/composables/usePatient'
+import { addConsultData, checkConsultData } from '@/composables/useConsult'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { useRouter } from 'vue-router'
 
@@ -15,15 +16,26 @@ const timeNow = computed(() => {
   return now.format('DD MMM YYYY HH:mm')
 })
 
-const submitLoading = ref(false);
+// --- Find Patient from HN ---
+const patientData: any = ref({})
+const patientSearch = ref(false)
+const patientHN = ref('')
+const loadingHN = ref(false)
 
-const patientData = ref()
+const findHN = async () => {
+  loadingHN.value = true
+  patientData.value = await findPatient(patientHN.value)
+  console.log(patientData.value.data)
+  loadingHN.value = false
+  patientSearch.value = true
+}
+
+// --- Add consult ---
 const admissionData = ref({
   an: 'i22-',
   cover: '',
   ward: ''
 })
-
 const consultData = ref({
   urgency: 0,
   consult_from: '',
@@ -37,16 +49,26 @@ const consultData = ref({
   time: useTimestamp({ offset:0 }).value
 })
 
+const submitLoading = ref(false);
 const addConsult = async () => {
   if( submitLoading.value ) return;
   submitLoading.value = true;
-  const res = await addConsultData(patientData.value.data, admissionData.value, consultData.value);
+  const checkValues: Array<boolean | string> = checkConsultData(patientData.value, admissionData, consultData)
+  console.log(checkValues)
+  if (checkValues[0] == false) {
+    alert('Missing value for '+checkValues[1])
+    submitLoading.value = false;
+    return
+  }
+  const res = await addConsultData(unref(patientData.value), admissionData.value, consultData.value);
   submitLoading.value = false;
   if (res?.result) {
     router.push('consult-status')
   }
 }
-const modal = ref(true);
+
+// --- Modal ---
+const modal = ref(false);
 const modalInfo = ref({
   title: 'Confirm submit?',
   content: ''
@@ -64,22 +86,31 @@ const onAccept = (c:any) => {
     <template v-slot:title>{{ modalInfo.title }}</template>
     {{ modalInfo.content }}
   </VModal>
-  <h1 class="text-3xl text-center font-bold">
+  <h1 class="text-3xl text-center font-bold py-6">
     Consultation
   </h1>
-  <br>
-  <div class="flex justify-end">
-    <button @click="$router.push('/find-consult')" 
-      class="btn bg-blue-700 text-white">Find Consult</button>
-  </div>
   <div class="w-full md:w-2/3 mx-auto">
+    <!-- --- Find consult --- -->
+    <div class="flex justify-end">
+      <button @click="$router.push('/find-consult')" 
+        class="btn bg-blue-700 text-white">Find Consult</button>
+      <button @click="$router.push('/consult-status')" 
+        class="btn bg-red-700 text-white">Consult status (for R.med)</button>
+    </div>
     <!-- <HNBox /> -->
     <!-- === Patient === -->
-    <PatientIden ref="patientData">
-    </PatientIden>
+    <div v-if="!patientSearch">
+      <span class="px-2">HN:</span> 
+      <input type="text" class="mx-2 input-box" v-model="patientHN">
+
+      <button v-if="!loadingHN" @click="findHN"
+        class="mx-2 btn border-blue-700 text-blue-700 !border-black">Add consult</button>
+      <button v-else class="mx-2 btn"><pulse-loader size="6px" color="#1D4ED8"></pulse-loader></button>
+    </div>
+    <PatientIden v-if="patientSearch" :patient="patientData.data"></PatientIden>
     <!-- Admission -->
 
-    <BorderedBox>
+    <BorderedBox v-if="patientSearch">
       <template #header>
         Admission Detail
       </template>
@@ -99,7 +130,7 @@ const onAccept = (c:any) => {
 
     <!-- Consult Details -->
 
-    <BorderedBox>
+    <BorderedBox v-if="patientSearch">
       <template #header>
         Consultation Detail
       </template>
@@ -160,10 +191,10 @@ const onAccept = (c:any) => {
       </div>
     </BorderedBox>
 
-    <div class="flex items-stretch justify-around mt-8">
-      <button class="bg-green-600 py-2 px-4 rounded-xl text-white font-bold text-md">
-        SAVE DRAFT
-      </button>
+    <div v-if="patientSearch" class="flex items-stretch justify-around my-4">
+      <!-- <button class="bg-green-600 py-2 px-4 rounded-xl text-white font-bold text-md"> -->
+      <!--   SAVE DRAFT -->
+      <!-- </button> -->
       <button @click="addConsult"
         class="bg-red-600 py-2 px-4 rounded-xl text-white font-bold text-md">
         <pulse-loader :loading="submitLoading" size="8px" color="#fff"></pulse-loader>
@@ -189,6 +220,6 @@ meta:
   @apply border border-black px-2 rounded py-1
 }
 .btn {
-  @apply border border-black rounded py-1 px-2
+  @apply border border-white rounded py-1 px-2 mx-1
 }
 </style>

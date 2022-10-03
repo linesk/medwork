@@ -24,7 +24,7 @@ interface ConsultDataType {
 const ConsultTransform: (data: any) => ConsultDataType = (data) => {
   return {
     id: parseInt(data.id),
-    HN: data.hn,
+    hn: data.hn,
     name: data.name,
     gender: 'male', //data.gender,
     dob: 861062400000,
@@ -45,8 +45,8 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
 export const findConsultCode = async (code: string) => {
   const HN = code.slice(0, 6)
   const Id = parseInt(code.slice(7), 16)
-  await delay(2000)
-  console.log('HN: '+HN+', Id: '+Id)
+  await delay(1000)
+  // console.log('HN: '+HN+', Id: '+Id)
   try {
     const res = await axios.get(ConsultAPI+'/find-consult-hn', {
       params: {
@@ -66,19 +66,44 @@ export const findConsultCode = async (code: string) => {
 }
 
 export const addConsultData = async (Patient: any, Admission: any, Consult: any) => {
-  const data = {...Patient, ...Admission, ...Consult}
+  const data = {...Patient.data, ...Admission, ...Consult}
 
-  /* const res = await axios.get('http://localhost/kku/api/public/ipd-consult', {
+  // console.log(Patient.data)
+  // console.log(data)
+  const res = await axios.get(ConsultAPI+'/ipd-consult', {
     params: data
   });
-  console.log(res.data); */
+  // console.log(res.data);
 
-  const res = {
-    data: {
-      result: true
-    }
-  };
-  await delay(3000);
+  await delay(1000);
 
   return res.data;
 }
+
+export const checkConsultData = (Patient: any, Admission: any, Consult: any) => {
+  const patientValues = ['hn', 'name', 'surname', 'dob']
+  const admissionValues = ['ward', 'cover']
+  const consultValues = ["consult_from", "consult_to", "detail", "dx", "consult", "consultee", "tel"]
+  let returnVal: Array<boolean | string> = [true]
+
+  for (const el of patientValues) {
+    if (Patient.data[el] == '') {
+      returnVal[0] = false
+      returnVal.push(el)
+    }
+  }
+  for (const el of admissionValues) {
+    if (Admission.value[el] == '') {
+      returnVal[0] = false
+      returnVal.push(el)
+    }
+  }
+  for (const el of consultValues) {
+    if (Consult.value[el] == '') {
+      returnVal[0] = false
+      returnVal.push(el)
+    }
+  }
+  return returnVal
+}
+

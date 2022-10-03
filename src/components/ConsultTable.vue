@@ -41,7 +41,7 @@ const showDetail = ref(false)
       Consult To: {{ Divisions[data.to] }}
     </div>
     <div class="col-span-4 md:col-span-3 table-box font-bold text-sm md:text-lg">
-      HN: {{ data.HN }}
+      HN: {{ data.hn }}
     </div>
     <div class="col-span-8 md:col-span-4 table-box">
       {{ data.name }}

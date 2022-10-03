@@ -32,22 +32,23 @@ const showDetail = ref(false)
         <!-- <span class="badge text-green-100 bg-green-500"> -->
         <!--   On -->
         <!-- </span> -->
-        <button @click="$router.push(`/consult/${data.HN}C${Math.abs(data.id).toString(16)}`)"
+        <router-link :to="`/consult/${data.hn}C${Math.abs(data.id).toString(16)}`"
+          target="_blank"
           class="badge ml-2 text-white bg-blue-700">
           <!-- {{ (showDetail ? 'Hide' : 'See') }} note -->
           See note
-        </button>
+        </router-link>
       </div>
     </div>
     <div class="bg-white w-full p-2
       grid grid-cols-4 gap-4 items-center">
       <div class="font-bold text-xl col-span-1">
-        {{ data.HN }}
+        {{ data.hn }}
       </div>
       <div class="col-span-2">
         <p> {{ data.name }} </p>
         <p> Sex Age </p>
-        <p> Dx: {{ data.dx }} </p>
+        <p> <strong>Dx:</strong> {{ data.dx }} </p>
       </div>
       <div class="font-bold text-xl text-center col-span-1">
         {{ data.ward }}

@@ -13,6 +13,8 @@ export const Divisions = {
   endo: 'Endocrine',
   hemato: 'Hematology',
   air: 'Rheumatology',
+  skin: 'Dermatology',
+  toxico: 'Toxicology',
 }
 export const FromDivisions = {
   Sx: 'Surgery',
@@ -29,7 +31,10 @@ export const FromDivisions = {
 
 interface ConsultDataType {
   id: number,
-  HN: string,
+  hn: string,
+  name: string,
+  dx: string,
+  consult: string,
   ward: string,
   from: string,
   to: string,
@@ -42,7 +47,10 @@ interface ConsultDataType {
 const ConsultTransform: (data: any) => ConsultDataType = (data) => {
   return {
     id: parseInt(data.id),
-    HN: data.hn,
+    hn: data.hn,
+    name: data.name,
+    dx: data.dx,
+    consult: data.consult,
     ward: data.ward,
     from: data.consult_from,
     to: data.consult_to,
@@ -53,9 +61,16 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
 }
 
 export const getConsultData = async (limit = 20) => {
+  // Use Endpoint
+  let ConsultAPI:string | boolean = ''
+  if (import.meta.env.DEV) {
+    ConsultAPI = import.meta.env.VITE_API_ENDPOINT_LOCAL ?? ''
+  } else {
+    ConsultAPI = import.meta.env.VITE_API_ENDPOINT ?? ''
+  }
   let data = {}
   try {
-    const res = await axios.get('http://localhost/kku/api/public/consults', {
+    const res = await axios.get(ConsultAPI + '/consults', {
       params: {
         limit
       },
