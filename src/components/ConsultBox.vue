@@ -46,8 +46,8 @@ const showDetail = ref(false)
         {{ data.hn }}
       </div>
       <div class="col-span-2">
-        <p> {{ data.name }} </p>
-        <p> Sex Age </p>
+        <p class="text-lg font-bold"> {{ data.name }} </p>
+        <p> {{ data.age.split(' ')?.[0] }} yr {{ data.gender }}</p>
         <p> <strong>Dx:</strong> {{ data.dx }} </p>
       </div>
       <div class="font-bold text-xl text-center col-span-1">

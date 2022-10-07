@@ -10,8 +10,9 @@ if (import.meta.env.DEV) {
 
 interface ConsultDataType {
   id: number,
-  HN: string,
+  hn: string,
   name: string,
+  age?: string,
   ward: string,
   from: string,
   to: string,
@@ -27,10 +28,12 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
     hn: data.hn,
     name: data.name,
     gender: 'male', //data.gender,
+    age: data.age,
     dob: 861062400000,
     ward: data.ward,
     from: data.consult_from,
     to: data.consult_to,
+    sub: data.sub,
     detail: data.detail,
     dx: data.dx,
     consult: data.consult, // Consult for?
@@ -40,6 +43,40 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
     urgency: data.urgency,
     time: Date.parse(data.time)/1000
   }
+}
+
+export const getConsultData = async (limit = 20) => {
+  // Use Endpoint
+  let ConsultAPI:string | boolean = ''
+  if (import.meta.env.DEV) {
+    ConsultAPI = import.meta.env.VITE_API_ENDPOINT_LOCAL ?? ''
+  } else {
+    ConsultAPI = import.meta.env.VITE_API_ENDPOINT ?? ''
+  }
+  let data = {}
+  try {
+    const res = await axios.get(ConsultAPI + '/consults', {
+      params: {
+        limit
+      },
+      // headers: {
+      //   Authorization: localStorage.getItem('medwork-auth') ?? ''
+      // }
+    })
+    if (res.data.error) {
+      return null
+    }
+    else {
+      data = res.data
+    }
+  } catch (e) {
+    console.error(e)
+  }
+  const ConsultData: Array<ConsultDataType> = Object.values(data).map(e => ConsultTransform(e))
+  
+  ConsultData.sort((a, b) => (b.id - a.id))
+  console.log(ConsultData)
+  return ConsultData
 }
 
 export const findConsultCode = async (code: string) => {

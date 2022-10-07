@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 // import { MockConsultList } from '@/composables/exampleData'
-import { getConsultData } from '@/composables/useDataAPI'
+import { getConsultData } from '@/composables/useConsult'
 
 const loading = ref(false)
 const today = dayjs().format('DD MMM YYYY')
