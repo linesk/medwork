@@ -10,12 +10,23 @@ const consultCode = ref('')
 const isLoading = ref(true)
 const result: any = ref(null)
 
+const getConsultByParams = () => {
+  if(!result.value || result.value.length == 0) return null
+  console.log(route.params.id)
+  return result.value.filter( (el: any) => {
+    return el.id == parseInt(route.params.id.slice(7), 16)
+  })
+}
+
 onMounted(async ()=>{
   console.log(route.params.id)
   result.value = await findConsultCode(route.params.id as string)
+  result.value = getConsultByParams()
   console.log(result.value)
   isLoading.value = false
+  getConsultByParams()
 })
+
 
 
 </script>

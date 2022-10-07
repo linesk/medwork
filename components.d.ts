@@ -15,7 +15,6 @@ declare module '@vue/runtime-core' {
     ConsultBox: typeof import('./src/components/ConsultBox.vue')['default']
     ConsultTable: typeof import('./src/components/ConsultTable.vue')['default']
     HNBox: typeof import('./src/components/HNBox.vue')['default']
-    IconMdiClose: typeof import('~icons/mdi/close')['default']
     PatientIden: typeof import('./src/components/PatientIden.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

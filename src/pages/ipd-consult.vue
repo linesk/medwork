@@ -86,12 +86,12 @@ const onAccept = (c:any) => {
     <template v-slot:title>{{ modalInfo.title }}</template>
     {{ modalInfo.content }}
   </VModal>
-  <h1 class="text-3xl text-center font-bold py-6">
+  <h1 class="text-3xl text-center font-bold py-4">
     Consultation
   </h1>
-  <div class="w-full md:w-2/3 mx-auto">
+  <div class="w-full md:w-4/5 lg:w-2/3 mx-auto">
     <!-- --- Find consult --- -->
-    <div class="flex justify-end">
+    <div class="flex justify-end py-3">
       <button @click="$router.push('/find-consult')" 
         class="btn bg-blue-700 text-white">Find Consult</button>
       <button @click="$router.push('/consult-status')" 
