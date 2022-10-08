@@ -7,7 +7,7 @@ import '@/styles/index.css';
 const routes = setupLayouts(generatedRoutes);
 
 export const createApp = ViteSSG(App, { routes }, async ctx => {
-	Object.values(import.meta.globEager('./modules/*.ts')).map(i =>
+	Object.values(import.meta.glob('./modules/*.ts', {eager: true})).map(i =>
 		i.install?.(ctx)
 	);
 }, {
