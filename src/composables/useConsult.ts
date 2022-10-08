@@ -27,9 +27,9 @@ const ConsultTransform: (data: any) => ConsultDataType = (data) => {
     id: parseInt(data.id),
     hn: data.hn,
     name: data.name,
-    gender: 'male', //data.gender,
+    gender: data.gender,
     age: data.age,
-    dob: 861062400000,
+    dob: 861062400000, // Dump
     ward: data.ward,
     from: data.consult_from,
     to: data.consult_to,
