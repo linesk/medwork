@@ -23,6 +23,12 @@ const patientHN = ref('')
 const loadingHN = ref(false)
 
 const findHN = async () => {
+  // Check if patient insert HN
+  if( patientHN.value.match(/^[a-zA-Z]{2}\d{4}/) == null ) {
+    alert("Please input valid HN")
+    return
+  }
+  console.log(patientHN.value.match(/^[a-zA-Z]{2}\d{4}/))
   loadingHN.value = true
   patientData.value = await findPatient(patientHN.value)
   console.log(patientData.value.data)
