@@ -28,7 +28,7 @@ const findHN = async () => {
     alert("Please input valid HN")
     return
   }
-  console.log(patientHN.value.match(/^[a-zA-Z]{2}\d{4}/))
+  patientHN.value = patientHN.value.toUpperCase()
   loadingHN.value = true
   patientData.value = await findPatient(patientHN.value)
   console.log(patientData.value.data)
@@ -38,7 +38,7 @@ const findHN = async () => {
 
 // --- Add consult ---
 const admissionData = ref({
-  an: 'i22-',
+  an: '',
   cover: '',
   ward: ''
 })
@@ -105,12 +105,12 @@ const onAccept = (c:any) => {
     </div>
     <!-- <HNBox /> -->
     <!-- === Patient === -->
-    <div v-if="!patientSearch">
+    <div v-if="true || !patientSearch" class="py-3">
       <span class="px-2">HN:</span> 
       <input type="text" class="mx-2 input-box" v-model="patientHN">
 
       <button v-if="!loadingHN" @click="findHN"
-        class="mx-2 btn border-blue-700 text-blue-700 !border-black">Add consult</button>
+        class="mx-2 btn border-blue-700 text-blue-700 !border-black">Search HN</button>
       <button v-else class="mx-2 btn"><pulse-loader size="6px" color="#1D4ED8"></pulse-loader></button>
     </div>
     <PatientIden v-if="patientSearch" :patient="patientData.data"></PatientIden>
@@ -122,7 +122,10 @@ const onAccept = (c:any) => {
       </template>
       <div class="grid grid-cols-12 gap-2 mt-2">
         <div class="col-span-2">AN</div>
-        <input class="col-span-4 input-box" v-model="admissionData.an"/>
+        <div class="col-span-4 flex items-center">
+          <span class="pr-2">i22-</span>
+          <input class="w-full input-box" v-model="admissionData.an"/>
+        </div>
 
         <div class="col-span-2 md:col-start-8">Cover</div>
         <input v-model="admissionData.cover"

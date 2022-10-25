@@ -119,7 +119,7 @@ export const addConsultData = async (Patient: any, Admission: any, Consult: any)
 
 export const checkConsultData = (Patient: any, Admission: any, Consult: any) => {
   const patientValues = ['hn', 'name', 'surname', 'dob']
-  const admissionValues = ['ward', 'cover']
+  const admissionValues = ['an', 'ward', 'cover']
   const consultValues = ["consult_from", "consult_to", "detail", "dx", "consult", "consultee", "tel"]
   let returnVal: Array<boolean | string> = [true]
 

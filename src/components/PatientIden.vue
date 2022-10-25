@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Patient } from '@/composables/exampleData'
+// import { Patient } from '@/composables/exampleData'
 import dayjs from 'dayjs'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps(['patient']);
-const data = ref(props.patient ?? Patient);
+const data = ref(props.patient);
 
 if (data.value.dob) data.value.birthday = dayjs(data.value.dob).add(543, 'y').format('DD MMM YYYY')
 
@@ -20,6 +20,7 @@ const formatDate = (date: Date) => {
 watchEffect(()=>{
   data.value.dob = datepickerData.value.valueOf()
   if (data.value.dob) data.value.age = dayjs().diff(dayjs(data.value.dob), 'y') + ' ปี'
+  data.value = props.patient
 })
 
 defineExpose({
@@ -34,7 +35,7 @@ defineExpose({
     </template>
     <div class="grid grid-cols-12 gap-2">
       <div class="col-span-2">HN</div>
-      <input class="col-span-4 input-box" v-model="data.hn"/>
+      <input class="col-span-4 input-box" v-model="props.patient.hn"/>
 
       <div class="col-span-3 md:col-start-8 md:col-span-2">Prefix</div>
       <input v-model="data.prefix"
