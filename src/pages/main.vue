@@ -17,6 +17,16 @@
       to: 'discharge',
       color: '#a10b24'
     },
+    {
+      title: 'Transfer Note',
+      to: 'transfer',
+      color: '#513c96'
+    },
+    {
+      title: 'Ward View',
+      to: 'ward',
+      color: '#2e0ba1'
+    },
   ]
   const Menu2 = [
     {
@@ -29,6 +39,16 @@
       to: 'division',
       color: '#04d484'
     },
+    {
+      title: 'Shift',
+      to: 'shift',
+      color: '#058525'
+    },
+    {
+      title: 'Rotation',
+      to: 'rotation',
+      color: '#cfb50e'
+    },
   ];
 </script>
 
@@ -38,7 +58,7 @@
       <div id="menu-set-1" class="flex flex-col items-stretch col-span-1">
         <div v-for="el in Menu1" :key="el.title"
           class="flex justify-center w-full">
-          <a href="#"
+          <a :href="el.to"
           class="menu-button"
           :style="{ backgroundColor: el.color }"
           >
@@ -50,7 +70,7 @@
       <div id="menu-set-2" class="flex flex-col items-stretch col-span-1">
         <div v-for="el in Menu2" :key="el.title"
           class="flex justify-center w-full">
-          <a href="#"
+          <a :href="el.to"
           class="menu-button"
           :style="{ backgroundColor: el.color }"
         >

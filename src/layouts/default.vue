@@ -8,7 +8,7 @@
 		class="
       pt-32
       px-4
-      mb-32
+      mb-20
 			bg-white
 			text-gray-800
 			min-h-screen

@@ -1,10 +1,17 @@
 <script setup lang="ts">
   import LogoMedwork from '@/assets/logo.png';
   import { currentRouteInfo } from '@/composables/routeInfo'
+  import { useRouter } from 'vue-router'
 
   const title = computed(() => {
     return currentRouteInfo()?.header ?? 'No route found'
   })
+  const router = useRouter()
+
+  const logout = () => {
+    localStorage.removeItem('medwork-auth')
+    router.push('/login')
+  }
 
 </script>
 
@@ -35,7 +42,7 @@
         <span class="lg:text-2xl text-lg">{{ title }}</span>
       </div>
 			<div class="ml-auto flex items-center h-full">
-        <a href="/" 
+        <a href="#" @click="logout"
           class="text-xs md:text-base px-4 py-2 rounded-lg bg-blue-700 font-bold text-white">
           Logout
         </a>

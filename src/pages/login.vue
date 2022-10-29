@@ -1,6 +1,19 @@
 <script setup lang="ts">
-import Logo from '@/assets/logo.png'
-import App from '@/App.vue';
+import Logo from '@/assets/Logo.png'
+import { useLogin } from '@/composables/useLogin'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const username = ref('')
+const password = ref('')
+const login = async () => {
+  const res = await useLogin(username.value, password.value)
+  console.log(res)
+  if (res) {
+    router.push('/main')
+  }
+}
 
 </script>
 
@@ -17,23 +30,23 @@ import App from '@/App.vue';
       </div>
       <div class="grid grid-cols-3 gap-2 py-4">
         <div class="text-white text-center self-center text-sm">USER</div>
-        <input type="text" 
+        <input type="text" v-model="username"
           class="col-span-2 rounded-md"
           placeholder="" />
         <div class="text-white text-center self-center text-sm">PASSWORD</div>
-        <input type="text" 
+        <input type="password" v-model="password" @keyup.enter="login"
           class="col-span-2 rounded-md"
           placeholder="" />
       </div>
       <div class="flex justify-center">
-        <a href="/main"
+        <a href="#" @click="login"
           class="text-white text-sm bg-orange-600 px-6 py-1 rounded-xl">
           SIGN IN
         </a>
       </div>
       <div class="flex justify-end">
         <span class="text-gray-200 text-sm italic">
-          Sign up
+          <a href="registration">Sign up</a>
         </span>
       </div>
     </div>
@@ -59,8 +72,10 @@ import App from '@/App.vue';
     </button>
     <a href="#" class="mt-3 text-sm text-blue-700">
       ภาควิชาอายุรศาสตร์
-
     </a>
+    <p>
+      medwork@kku.ac.th:medkku123
+    </p>
   </div>
 </template>
 

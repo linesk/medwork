@@ -9,6 +9,10 @@ import Pages from 'vite-plugin-pages';
 import Layouts from 'vite-plugin-vue-layouts';
 import { VitePWA } from 'vite-plugin-pwa';
 import VueI18n from '@intlify/vite-plugin-vue-i18n';
+
+// Automate SSL for https
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
@@ -84,11 +88,15 @@ export default defineConfig({
 				],
 			},
 		}),
-		VueI18n({
-			runtimeOnly: true,
-			compositionOnly: true,
-			include: [resolve(__dirname, 'locales/**')],
-		}),
+    // --- Disable i18n ---
+		// VueI18n({
+		// 	runtimeOnly: true,
+		// 	compositionOnly: true,
+		// 	include: [resolve(__dirname, 'locales/**')],
+		// }),
+
+    // Uncomment this for local https server
+    // basicSsl(),
 	],
 	resolve: {
 		alias: {
@@ -96,6 +104,7 @@ export default defineConfig({
 		},
 	},
 	server: {
+    port: 3000, // Remain port 3000 as Vite2 default
 		fs: {
 			strict: true,
 		},

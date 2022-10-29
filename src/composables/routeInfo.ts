@@ -21,6 +21,26 @@ const routes = [
     name: 'ipd-consult',
     header: 'IPD Consultation form'
   },
+  {
+    path: '/division',
+    name: 'division',
+    header: 'Role'
+  },
+  {
+    path: '/registration',
+    name: 'registration',
+    header: 'Registration'
+  },
+  {
+    path: '/admission',
+    name: 'admission',
+    header: 'Admission Record'
+  },
+  {
+    path: '/acmed',
+    name: 'acmed',
+    header: 'AC Med'
+  }
 ]
 
 export const currentRouteInfo = () => {

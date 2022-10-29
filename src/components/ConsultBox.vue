@@ -1,11 +1,21 @@
 <script setup lang="ts">
 const props = defineProps(['data'])
 
+const headerClass = computed(()=>{
+  let hc = ["flex w-full px-2 py-1 text-black"]
+  if (props.data?.urgency > 0) hc.push('bg-red-300')
+  else hc.push('bg-blue-200')
+
+  return hc
+})
+
+const showDetail = ref(false)
+
 </script>
 
 <template>
   <div class="flex flex-col w-full border border-blue-700 my-3">
-    <div class="flex bg-blue-200 w-full px-2 py-1 text-black">
+    <div :class="headerClass">
       <span class="badge text-purple-100 bg-purple-700">
         {{ data.from }}
       </span>
@@ -13,34 +23,56 @@ const props = defineProps(['data'])
       <span class="badge text-pink-100 bg-pink-700">
         {{ data.to }}
       </span>
-      <span v-if="data.urgent > 0" class="text-red-500 font-bold px-4">
-        <div class="rounded-full border-2 border-red-600 px-2">
+      <span v-if="data.urgency > 0" class="text-sm text-red-700 font-bold px-4">
+        <div class="rounded-full border-2 border-red-700 px-2">
         E
         </div>
       </span>
       <div class="grow flex justify-end">
-        <span class="badge text-green-100 bg-green-500">
-          On
-        </span>
-        <span class="badge ml-2 text-blue-100 bg-blue-700">
+        <!-- <span class="badge text-green-100 bg-green-500"> -->
+        <!--   On -->
+        <!-- </span> -->
+        <router-link :to="`/consult/${data.hn}C${Math.abs(data.id).toString(16)}`"
+          target="_blank"
+          class="badge ml-2 text-white bg-blue-700">
+          <!-- {{ (showDetail ? 'Hide' : 'See') }} note -->
           See note
-        </span>
+        </router-link>
       </div>
     </div>
     <div class="bg-white w-full p-2
       grid grid-cols-4 gap-4 items-center">
       <div class="font-bold text-xl col-span-1">
-        {{ data.HN }}
+        {{ data.hn }}
       </div>
       <div class="col-span-2">
-        <p> Name </p>
-        <p> Sex Age </p>
-        <p> Diagnosis </p>
+        <p class="text-lg font-bold"> {{ data.name }} </p>
+        <p> {{ data.age.split(' ')?.[0] }} yr {{ data.gender }}</p>
+        <p> <strong>Dx:</strong> {{ data.dx }} </p>
       </div>
       <div class="font-bold text-xl text-center col-span-1">
         {{ data.ward }}
       </div>
-
+    </div>
+    <div v-if="showDetail">
+      <div class="relative flex p-1 items-center bg-blue-100">
+        <div class="flex-grow border-t border-gray-400"></div>
+        <span class="flex-shrink mx-4 text-black">Detail</span>
+        <div class="flex-grow border-t border-gray-400"></div>
+      </div>
+      <div class="py-2">
+        Detail ...<br>
+        <p class="text-left break-words">{{ data.detail }}</p>
+        <hr>
+        <p class="text-left break-words">Consult for: {{ data.consult }}</p>
+        <hr>
+        <p class="text-left gap-x-4">
+        <span class="text-left break-words pr-6">From: {{ data.consultee }}</span>
+        <span class="text-left break-words">Tel: {{ data.tel }}</span>
+        </p>
+        <hr>
+        <p class="text-left break-words">Time: {{ data.time }}</p>
+      </div>
     </div>
   </div>
 
