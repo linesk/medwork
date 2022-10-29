@@ -95,7 +95,7 @@ const exampleData = {
           <div class="data-header">
               Patient Identification
           </div>
-          <div class="grid grid-cols-6 gap-2 mt-2">
+          <div class="grid md:grid-cols-6 grid-cols-3 gap-2 sm:mt-2 mt-12">
             <div class="col-span-1">HN</div>
             <div class="col-span-2">{{ exampleData.hn }}</div>
 
